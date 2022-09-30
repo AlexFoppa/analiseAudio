@@ -2,28 +2,28 @@ import moviepy.editor as mp
 import speech_recognition as sr
 import moviepy.editor as mp
 from pydub import AudioSegment
+import os
 import sys
 
 # colocar o diretório que está o seu vídeo na variável path 
-path = "./exemplo.mp4" 
+if 1 > 2:
+   path = "./audios/exemplo.mp4" 
+   nome = os.path.basename(path)
 
-# convert mp4 paramp3
+   # convert mp4 paramp3
 
-clip = mp.VideoFileClip(path).subclip()
+   clip = mp.VideoFileClip(path).subclip()
+   clip.audio.write_audiofile("./intermediario.mp3")
+   r = sr.Recognizer()
+   src=(r"./intermediario.mp3")
 
-# essa função irá gerar um arquivo de áudio no diretório que você está rodando o script 
+   # convert mp3 file to wav
+   sound = AudioSegment.from_mp3(src)
+   sound.export("./intermediario.wav", format="wav")
 
-clip.audio.write_audiofile("./nome_para_audio.mp3")
-r = sr.Recognizer()
-src=(r"./nome_para_audio.mp3")
+   file_audio = sr.AudioFile("./intermediario.wav")
 
-
-# convert mp3 file to wav
-sound = AudioSegment.from_mp3(src)
-sound.export("./portugues.wav", format="wav")
-
-file_audio = sr.AudioFile("./portugues.wav")
-
+file_audio = sr.AudioFile("./audios/WhatsApp-Ptt-2022-09-25-at-15.49.44.wav")
 # use the audio file as the audio source
 
 r = sr.Recognizer()
