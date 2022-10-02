@@ -29,5 +29,3 @@ def get_audio_by_name(name):
 def get_audio_by_id(id):
     c.execute("SELECT * FROM audios WHERE id=:id", {'id': id})
     return c.fetchall()
-    
-conn.close()
