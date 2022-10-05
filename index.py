@@ -3,8 +3,8 @@ import speech_recognition as sr
 import moviepy.editor as mp
 from pydub import AudioSegment
 import os
-from audio import Audio 
-from database import insert_audio, get_all_audio
+from app.models.audio import Audio 
+from app.database.database import insert_audio, get_all_audio
 
 # colocar o diretório que está o seu vídeo na variável path 
 if 1 > 2:
