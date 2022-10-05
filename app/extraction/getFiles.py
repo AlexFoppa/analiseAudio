@@ -2,8 +2,6 @@ from os import walk
 
 path = './audios/'
 
-f = []
-for (dirpath, dirnames, filenames) in walk(path):
-    print(filenames)
-    f.extend(filenames)
-    break
+filenames = next(walk(path), (None, None, []))[2] 
+
+print(filenames)
