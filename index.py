@@ -3,6 +3,7 @@ import speech_recognition as sr
 import moviepy.editor as mp
 from pydub import AudioSegment
 import os
+from app.extraction.getFiles import get_all_files
 from app.models.audio import Audio 
 from app.database.database import insert_audio, get_all_audio
 
@@ -29,14 +30,16 @@ file_audio = sr.AudioFile("./audios/WhatsApp-Ptt-2022-09-25-at-15.49.44.wav")
 
 # use the audio file as the audio source
 
-r = sr.Recognizer()
-with file_audio as source:
-   audio_text = r.record(source)
-   text = r.recognize_google(audio_text,language='pt-BR')
+#r = sr.Recognizer()
+#with file_audio as source:
+#   audio_text = r.record(source)
+#   text = r.recognize_google(audio_text,language='pt-BR')
 
 
-#cria o Objeto Audio e aramazena na base
 
-analisedAudio = Audio('WhatsApp-Ptt-2022-09-25-at-15.49.44.wav', text, 'none','none')
-insert_audio (analisedAudio)
-print(get_all_audio())
+
+files = get_all_files("./audios/")
+
+for file in files:
+   insert_audio(file)
+
