@@ -10,12 +10,15 @@ def create_table():
         c.execute("""CREATE TABLE audios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name text,
-            text text
+            text text,
+            extension text,
+            type text
             )""")
 
 def insert_audio(audio):
     with conn:
-        c.execute("INSERT INTO audios (name, text) VALUES (:name, :text)", {'name':audio.name, 'text':audio.text})
+        c.execute("INSERT INTO audios (name, text, extension, type) VALUES (:name, :text, :extension, :type)", 
+        {'name':audio.name, 'text':audio.text, 'extension':audio.extension, 'type':audio.type})
         return c.lastrowid
 
 def get_all_audio():

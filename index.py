@@ -37,6 +37,6 @@ with file_audio as source:
 
 #cria o Objeto Audio e aramazena na base
 
-analisedAudio = Audio('WhatsApp-Ptt-2022-09-25-at-15.49.44.wav', text)
+analisedAudio = Audio('WhatsApp-Ptt-2022-09-25-at-15.49.44.wav', text, 'none','none')
 insert_audio (analisedAudio)
 print(get_all_audio())
