@@ -12,13 +12,14 @@ def create_table():
             name text,
             text text,
             extension text,
-            type text
+            type text, 
+            path text
             )""")
 
 def insert_audio(audio):
     with conn:
-        c.execute("INSERT INTO audios (name, text, extension, type) VALUES (:name, :text, :extension, :type)", 
-        {'name':audio.name, 'text':audio.text, 'extension':audio.extension, 'type':audio.type})
+        c.execute("INSERT INTO audios (name, text, extension, type, path) VALUES (:name, :text, :extension, :type, :path)", 
+        {'name':audio.name, 'text':audio.text, 'extension':audio.extension, 'type':audio.type, 'path':audio.path})
         return c.lastrowid
 
 def get_all_audio():
