@@ -7,7 +7,7 @@ path = "./audios/"
 files = get_all_files(path)
 
 for file in files:
-   get_text(file, path)
+   get_text(file)
    insert_audio(file)
 
 print(get_all_audio())
