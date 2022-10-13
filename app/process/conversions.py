@@ -2,28 +2,34 @@ import moviepy.editor as mp
 import speech_recognition as sr
 import moviepy.editor as mp
 from pydub import AudioSegment
-import os
-from app.extraction.getFiles import get_all_files
-from app.database.database import insert_audio, get_all_audio
-from app.process.getText import get_text
+from app.models.audio import Audio 
 
-path = "./audios/"
+def try_conversion(file: Audio):
+   if file.type == 'video/mp4':
+      return mp4_to_wav(file)
+   elif file.type == 'audio/mpeg':
+      return mpeg_to_wav(file)
+   else:
+      return False    
 
-      
-# colocar o diretório que está o seu vídeo na variável path 
-if 1 > 2:
-   path = "./audios/exemplo.mp4" 
-   nome = os.path.basename(path)
+def mp4_to_wav(file: Audio):
+   temp_path = "./temp_audios/"+file.name+".mp3"
 
-   # convert mp4 paramp3
+   clip = mp.VideoFileClip(file.path).subclip()
+   clip.audio.write_audiofile(temp_path)
+   sound = AudioSegment.from_mp3(temp_path)
 
-   clip = mp.VideoFileClip(path).subclip()
-   clip.audio.write_audiofile("./intermediario.mp3")
-   r = sr.Recognizer()
-   src=(r"./intermediario.mp3")
+   temp_path = "./temp_audios/"+file.name+".wav"
+   sound.export(temp_path, format="wav")
+   sr.AudioFile(temp_path)
+   
+   return temp_path
 
-   # convert mp3 file to wav
-   sound = AudioSegment.from_mp3(src)
-   sound.export("./intermediario.wav", format="wav")
+def mpeg_to_wav(file: Audio):
+   temp_path = "./temp_audios/"+file.name+".wav"
+   sound = AudioSegment.from_mp3(file.path)
 
-   file_audio = sr.AudioFile("./intermediario.wav")
+   sound.export(temp_path, format="wav")
+   sr.AudioFile(temp_path)
+   
+   return temp_path
