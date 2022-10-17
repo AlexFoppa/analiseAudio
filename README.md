@@ -1,12 +1,13 @@
 ## Conversor de audio para texto para computação forense
 
 Dependências:
-SpeechRecognition, moviepy, pydub e ffmpeg
+SpeechRecognition, moviepy, pydub, mutagen e ffmpeg
 
 Comandos utilizados: 
 pip install SpeechRecognition
 pip install moviepy
 pip install pydub
+pip install mutagen
 
 Instalação do ffmpeg no windowns:
 https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/
