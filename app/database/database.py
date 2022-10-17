@@ -13,13 +13,15 @@ def create_table():
             text text,
             extension text,
             type text, 
-            path text
+            path text,
+            hashMD5 text,
+            hashSHA256 text
             )""")
 
 def insert_audio(audio):
     with conn:
-        c.execute("INSERT INTO audios (name, text, extension, type, path) VALUES (:name, :text, :extension, :type, :path)", 
-        {'name':audio.name, 'text':audio.text, 'extension':audio.extension, 'type':audio.type, 'path':audio.path})
+        c.execute("INSERT INTO audios (name, text, extension, type, path, hashMD5, hashSHA256) VALUES (:name, :text, :extension, :type, :path, :hashMD5,:hashSHA256)", 
+                {'name':audio.name, 'text':audio.text, 'extension':audio.extension,'type':audio.type,'path':audio.path,'hashMD5':audio.hashMD5,'hashSHA256':audio.hashSHA256})
         return c.lastrowid
 
 def get_all_audio():
