@@ -16,7 +16,10 @@ def create_table():
             path text,
             hashMD5 text,
             hashSHA256 text,
-            duration text
+            duration text,
+            creationDate text,
+            modificationDate text,
+            size text
             )""")
 
 def clean_table():
@@ -26,8 +29,8 @@ def clean_table():
 
 def insert_audio(audio):
     with conn:  
-        c.execute("INSERT INTO audios (name, text, extension, type, path, hashMD5, hashSHA256, duration) VALUES (:name, :text, :extension, :type, :path, :hashMD5,:hashSHA256, :duration)", 
-                {'name':audio.name, 'text':audio.text, 'extension':audio.extension,'type':audio.type,'path':audio.path,'hashMD5':audio.hashMD5,'hashSHA256':audio.hashSHA256, 'duration':audio.duration})
+        c.execute("INSERT INTO audios (name, text, extension, type, path, hashMD5, hashSHA256, duration, creationDate, modificationDate, size) VALUES (:name, :text, :extension, :type, :path, :hashMD5,:hashSHA256, :duration, :creationDate, :modificationDate, :size)", 
+                {'name':audio.name, 'text':audio.text, 'extension':audio.extension,'type':audio.type,'path':audio.path,'hashMD5':audio.hashMD5,'hashSHA256':audio.hashSHA256, 'duration':audio.duration, 'creationDate':audio.creationDate, 'modificationDate':audio.modificationDate, 'size':audio.size })
         return c.lastrowid
 
 def get_all_audio():
