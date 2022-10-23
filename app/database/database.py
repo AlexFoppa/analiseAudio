@@ -1,7 +1,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('audio.db')
+conn = sqlite3.connect('audio.db', check_same_thread=False)
 
 c = conn.cursor()
 
@@ -18,6 +18,11 @@ def create_table():
             hashSHA256 text,
             duration text
             )""")
+
+def clean_table():
+    with conn:
+        c.execute("""DROP TABLE IF EXISTS audios""")
+        create_table()
 
 def insert_audio(audio):
     with conn:  
@@ -36,3 +41,4 @@ def get_audio_by_name(name):
 def get_audio_by_id(id):
     c.execute("SELECT * FROM audios WHERE id=:id", {'id': id})
     return c.fetchall()
+
