@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
 from app.extraction.getFiles import get_all_files
-from app.database.database import clean_table, create_table, insert_audio, get_all_audio
+from app.database.database import clean_table, insert_audio, get_all_audio
 from app.process.getText import get_text
 
 def format_all_audios(audios):
     allAudios = pd.DataFrame((audios))
-    allAudios.columns = ["ID", "Nome", "Texto", "Exensão", "Tipo", "Caminho", "Hash MD5", "Hash SHA256", "Duração", "Data de Criação", "Data de Modificação", "Tamanho"]
+    allAudios.columns = ["ID", "Nome", "Texto", "Exensão", "Tipo", "Caminho", "Hash MD5", "Hash SHA256", "Duração", "Data de Criação", "Data da Última Modificação", "Tamanho (Bytes)"]
     allAudios = allAudios.drop("ID", axis=1)
     return allAudios
 
